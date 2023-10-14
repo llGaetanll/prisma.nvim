@@ -1,4 +1,5 @@
 local convert = require("prisma.util.convert")
+local array = require("prisma.util.array")
 
 describe("Conversion tests", function()
 	-- generated from python. Used for tests
@@ -132,5 +133,30 @@ describe("Conversion tests", function()
 
 	it("hsv->xyz", function()
 		test_all(colors.xyz, colors.hsv, convert.hsv_to_xyz)
+	end)
+end)
+
+describe("Array tests", function()
+	local cmp_lists = function(lst1, lst2)
+		assert.equals(#lst1, #lst2)
+
+		for i = 1, #lst1 do
+			local a = lst1[i]
+			local b = lst2[i]
+
+			assert.equals(a, b)
+		end
+	end
+
+	it("linspace 1", function()
+		cmp_lists({ 0 }, array.linspace(0, 1, 1))
+	end)
+
+	it("linspace 2", function()
+		cmp_lists({ 1, 2, 3, 4, 5 }, array.linspace(1, 5, 5))
+	end)
+
+	it("linspace 3", function()
+		cmp_lists({ -2, -1, 0, 1, 2 }, array.linspace(-2, 2, 5))
 	end)
 end)
