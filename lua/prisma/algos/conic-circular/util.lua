@@ -1,11 +1,10 @@
 local convert = require("prisma.util.convert")
-local array = require("prisma.util.array")
 
 local M = {}
 
 -- For a small circle B with center b = (x, y) and radius r_b. Returns all
 -- intersection points with ray cast from the origin at an angle theta.
-local coord = function(theta, b, r_b)
+function M.coord(theta, b, r_b)
 	local x_b = b[1]
 	local y_b = b[2]
 
@@ -30,7 +29,7 @@ end
 
 -- Given an hsv_bias point, finds the line going from the bottom of the cone
 -- through that point, and returns the point on the line with the value v.
-local line_point = function(hsv_bias, v)
+function M.line_point(hsv_bias, v)
 	local xyz = convert.hsv_to_xyz(hsv_bias)
 
 	local x = xyz[1]
@@ -47,7 +46,7 @@ end
 -- with the same hue and value.
 --
 -- Used so that coord doesn't fail.
-local hsv_corrected = function(hsv)
+function M.hsv_corrected(hsv)
 	local xyz = convert.hsv_to_xyz(hsv)
 
 	local x = xyz[1]
@@ -71,85 +70,6 @@ local hsv_corrected = function(hsv)
 	end
 
 	return convert.xyz_to_hsv({ x, y, z })
-end
-
-function M.gen_hues(hsv_bias, n, m, vr)
-	local hues = {}
-
-	local thetas = array.linspace(0, 2 * math.pi, n + 1)
-	thetas = { table.unpack(array, 1, #array - 1) } -- keep all but last value
-
-	local lo = vr[1]
-	local hi = vr[2]
-	local vs = array.linspace(lo, hi, m)
-
-	hsv_bias = hsv_corrected(hsv_bias)
-
-	local ps = {}
-	for i, v in ipairs(vs) do
-		local p = line_point(hsv_bias, v)
-		local x = p[1]
-		local y = p[2]
-		local z = p[3]
-
-		-- all the hues at value v
-		local v_hues = {}
-
-		-- the radius of the cone
-		-- equal to the height of the point
-		local r_c = z
-
-		-- bounds on the radius
-		local min_r = math.sqrt(x ^ 2 + y ^ 2)
-		local max_r = r_c - min_r
-
-		-- we define the radius of the circle
-		-- at that height to be halfway between
-		-- the min and max
-		-- TODO: make this a parameter
-		local r = (min_r + max_r) / 2
-
-		for j, t in ipairs(thetas) do
-			local co = coord(t, { x, y }, r)
-			local x_d = co[1]
-			local y_d = co[2]
-
-			local hex = convert.xyz_to_hex({ x_d, y_d, z })
-			table.insert(v_hues, hex)
-		end
-
-		table.insert(hues, v_hues)
-	end
-
-	return hues
-end
-
-function M.gen_shades(hsv_bias, m, vr_lo, vr_hi)
-	local shades = {}
-
-	local lo = vr_lo[1]
-	local hi = vr_lo[2]
-	local vs_lo = array.linspace(lo, hi, m)
-
-	local darks = {}
-	for i, v in ipairs(vs_lo) do
-		local p = line_point(hsv_bias, v)
-		local dark = convert.xyz_to_hex(p)
-		table.insert(darks, dark)
-	end
-
-	local lo = vr_hi[1]
-	local hi = vr_hi[2]
-	local vs_hi = array.linspace(lo, hi, m)
-
-	local lights = {}
-	for i, v in ipairs(vs_hi) do
-		local p = line_point(hsv_bias, v)
-		local light = convert.xyz_to_hex(p)
-		table.insert(lights, light)
-	end
-
-	return { darks, lights }
 end
 
 return M
