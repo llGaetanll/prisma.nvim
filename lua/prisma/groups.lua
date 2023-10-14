@@ -55,32 +55,32 @@ local to_palette = function(colors, variant)
 end
 
 return function(config, colors)
-	-- if config.terminal_colors then
-	-- 	local term_colors = {
-	-- 		colors.bg0,
-	-- 		colors.neutral_red,
-	-- 		colors.neutral_green,
-	-- 		colors.neutral_yellow,
-	-- 		colors.neutral_blue,
-	-- 		colors.neutral_purple,
-	-- 		colors.neutral_aqua,
-	-- 		colors.fg4,
-	-- 		colors.gray,
-	-- 		colors.red,
-	-- 		colors.green,
-	-- 		colors.yellow,
-	-- 		colors.blue,
-	-- 		colors.purple,
-	-- 		colors.aqua,
-	-- 		colors.fg1,
-	-- 	}
-	--
-	-- 	for i, color in ipairs(term_colors) do
-	-- 		vim.g["terminal_color_" .. i - 1] = color
-	-- 	end
-	-- end
-
 	local palette = to_palette(colors, config.variant)
+
+	if config.terminal_colors then
+		local term_colors = {
+			palette.bg0,
+			palette.neutral_red,
+			palette.neutral_green,
+			palette.neutral_yellow,
+			palette.neutral_blue,
+			palette.neutral_purple,
+			palette.neutral_aqua,
+			palette.fg4,
+			palette.gray,
+			palette.red,
+			palette.green,
+			palette.yellow,
+			palette.blue,
+			palette.purple,
+			palette.aqua,
+			palette.fg1,
+		}
+
+		for i, color in ipairs(term_colors) do
+			vim.g["terminal_color_" .. i - 1] = color
+		end
+	end
 
 	local groups = {
 		PrismaFg0 = { fg = palette.fg0 },
