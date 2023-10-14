@@ -11,6 +11,29 @@ Prisma.config = {
 		hue_value = 0.8,
 		shade_value_range = { 0.1, 1 },
 	},
+
+	terminal_colors = true,
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = {
+		strings = true,
+		emphasis = true,
+		comments = true,
+		operators = false,
+		folds = true,
+	},
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	invert_intend_guides = false,
+	inverse = true,
+	contrast = "",
+	palette_overrides = {},
+	overrides = {},
+	dim_inactive = false,
+	transparent_mode = false,
 }
 
 local algos_dir = "prisma.algos"
