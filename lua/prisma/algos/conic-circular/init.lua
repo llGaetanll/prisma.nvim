@@ -25,7 +25,7 @@ function M.gen_hues(hsv_bias, n, value)
 	local hues = {}
 
 	local thetas = array.linspace(0, 2 * math.pi, n + 1)
-	thetas = { table.unpack(array, 1, #array - 1) } -- keep all but last value
+	table.remove(thetas, #thetas) -- keep all but last value
 
 	hsv_bias = util.hsv_corrected(hsv_bias)
 
@@ -54,7 +54,8 @@ function M.gen_hues(hsv_bias, n, value)
 		local y_d = co[2]
 
 		local hex = convert.xyz_to_hex({ x_d, y_d, z })
-		table.insert(hues, hex)
+		local hex_str = fmt.hex_to_str(hex)
+		table.insert(hues, hex_str)
 	end
 
 	return hues
@@ -84,7 +85,8 @@ function M.gen_shades(hsv_bias, m, vr_lo, vr_hi)
 	for _, v in ipairs(vs_lo) do
 		local p = util.line_point(hsv_bias, v)
 		local dark = convert.xyz_to_hex(p)
-		table.insert(darks, dark)
+		local dark_str = fmt.hex_to_str(dark)
+		table.insert(darks, dark_str)
 	end
 
 	local lo = vr_hi[1]
@@ -95,7 +97,8 @@ function M.gen_shades(hsv_bias, m, vr_lo, vr_hi)
 	for _, v in ipairs(vs_hi) do
 		local p = util.line_point(hsv_bias, v)
 		local light = convert.xyz_to_hex(p)
-		table.insert(lights, light)
+		local light_str = fmt.hex_to_str(light)
+		table.insert(lights, light_str)
 	end
 
 	return { darks, lights }
