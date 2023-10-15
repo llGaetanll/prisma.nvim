@@ -69,17 +69,24 @@ Prisma.load = function()
 	local darks = colors.darks
 	local hues = colors.hues
 
+	local str = ""
 	for _, v in ipairs(lights) do
-		vim.notify(fmt.hex_to_str(v))
+		str = str .. fmt.hex_to_str(v) .. "\n"
 	end
+
+	str = str .. "\n"
 
 	for _, v in ipairs(darks) do
-		vim.notify(fmt.hex_to_str(v))
+		str = str .. fmt.hex_to_str(v) .. "\n"
 	end
 
+	str = str .. "\n"
+
 	for _, v in ipairs(hues) do
-		vim.notify(fmt.hex_to_str(v))
+		str = str .. fmt.hex_to_str(v) .. "\n"
 	end
+
+	vim.notify_once(str)
 
 	local groups = gen_groups(Prisma.config, colors)
 
