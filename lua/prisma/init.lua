@@ -1,16 +1,21 @@
 local gen_groups = require("prisma.groups")
-local fmt = require("prisma.util.fmt")
 
 local Prisma = {}
 
 Prisma.config = {
 	variant = "dark", -- "light" | "dark"
 	algorithm = "conic-circular",
+
+	-- params passed to the chosen algorithm
 	params = {
-		-- the base color of the colorscheme
 		bias = "#769294",
 		hue_value = 0.8,
-		shade_value_range = { 0.1, 0.8 },
+
+		angular_bias = 0.1, -- number in [0, 1)
+		hue_rot = 3,
+
+		dark_range = { 0.1, 4 },
+		light_range = { 0.6, 1 },
 	},
 
 	terminal_colors = true,

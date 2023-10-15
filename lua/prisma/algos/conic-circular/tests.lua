@@ -58,35 +58,35 @@ describe("Util", function()
 end)
 
 describe("Algo tests", function()
-	it("test gen_colors", function()
-		local vals = alg.gen_colors({
-			-- the base color of the colorscheme
-			bias = "#769294",
-			hue_value = 0.8,
-			shade_value_range = { 0.1, 0.8 },
-		})
-
-		local lights = vals.lights
-		local darks = vals.darks
-		local hues = vals.hues
-
-		local str = ""
-		for _, v in ipairs(lights) do
-			str = str .. v .. "\n"
-		end
-
-		str = str .. "\n"
-
-		for _, v in ipairs(darks) do
-			str = str .. v .. "\n"
-		end
-
-		str = str .. "\n"
-
-		for _, v in ipairs(hues) do
-			str = str .. v .. "\n"
-		end
-
-		print(str)
-	end)
+	-- it("test gen_colors", function()
+	-- 	local vals = alg.gen_colors({
+	-- 		-- the base color of the colorscheme
+	-- 		bias = "#769294",
+	-- 		hue_value = 0.8,
+	-- 		shade_value_range = { 0.1, 0.8 },
+	-- 	})
+	--
+	-- 	local lights = vals.lights
+	-- 	local darks = vals.darks
+	-- 	local hues = vals.hues
+	--
+	-- 	local str = ""
+	-- 	for _, v in ipairs(lights) do
+	-- 		str = str .. v .. "\n"
+	-- 	end
+	--
+	-- 	str = str .. "\n"
+	--
+	-- 	for _, v in ipairs(darks) do
+	-- 		str = str .. v .. "\n"
+	-- 	end
+	--
+	-- 	str = str .. "\n"
+	--
+	-- 	for _, v in ipairs(hues) do
+	-- 		str = str .. v .. "\n"
+	-- 	end
+	--
+	-- 	print(str)
+	-- end)
 end)

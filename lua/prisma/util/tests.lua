@@ -249,4 +249,47 @@ describe("Array tests", function()
 			cmp_lists(expected, array.linspace(lo, hi, n), close_enough)
 		end
 	end)
+
+	it("rotate tests", function()
+		local eq = function(a, b)
+			return a == b
+		end
+
+		local tests = {
+			{
+				{ { 1, 2, 3 }, 1 },
+				{ 3, 1, 2 },
+			},
+			{
+				{ { 1, 2, 3 }, 2 },
+				{ 2, 3, 1 },
+			},
+			{
+				{ { 1, 2, 3 }, 3 },
+				{ 1, 2, 3 },
+			},
+			{
+				{ { 1 }, 1 },
+				{ 1 },
+			},
+			{
+				{ { 1 }, 2 },
+				{ 1 },
+			},
+			{
+				{ { 1 }, 3 },
+				{ 1 },
+			},
+		}
+
+		for _, v in ipairs(tests) do
+			local input = v[1]
+			local expected = v[2]
+
+			local lst = input[1]
+			local n = input[2]
+
+			cmp_lists(expected, array.rotate(lst, n), eq)
+		end
+	end)
 end)

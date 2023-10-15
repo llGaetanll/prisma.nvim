@@ -17,4 +17,15 @@ function M.linspace(lo, hi, n)
 	return vals
 end
 
+-- Rotates the list `lst` `n` elements to the right
+function M.rotate(lst, n)
+	local new_lst = {}
+
+	for i = 1, #lst do
+		table.insert(new_lst, lst[(i - n - 1) % #lst + 1])
+	end
+
+	return new_lst
+end
+
 return M
