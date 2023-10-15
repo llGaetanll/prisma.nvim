@@ -1,4 +1,5 @@
 local gen_groups = require("prisma.groups")
+local fmt = require("prisma.util.fmt")
 
 local Prisma = {}
 
@@ -63,6 +64,23 @@ Prisma.load = function()
 		return
 	end
 	local colors = algo.gen_colors(Prisma.config.params)
+
+	local lights = colors.lights
+	local darks = colors.darks
+	local hues = colors.hues
+
+	for _, v in ipairs(lights) do
+		vim.notify(fmt.hex_to_str(v))
+	end
+
+	for _, v in ipairs(darks) do
+		vim.notify(fmt.hex_to_str(v))
+	end
+
+	for _, v in ipairs(hues) do
+		vim.notify(fmt.hex_to_str(v))
+	end
+
 	local groups = gen_groups(Prisma.config, colors)
 
 	-- add highlights
