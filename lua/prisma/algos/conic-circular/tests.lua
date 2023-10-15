@@ -1,5 +1,6 @@
 local alg = require("prisma.algos.conic-circular")
 local util = require("prisma.algos.conic-circular.util")
+local fmt = require("prisma.util.fmt")
 
 local test_data = require("prisma.algos.conic-circular.test-data")
 
@@ -57,28 +58,18 @@ describe("Util", function()
 end)
 
 describe("Algo tests", function()
-	it("test gen_colors", function()
-		local vals = alg.gen_colors({
-			-- the base color of the colorscheme
-			bias = "#769294",
-			hue_value = 0.8,
-			shade_value_range = { 0.1, 1 },
-		})
-
-		local lights = vals.lights
-		local darks = vals.darks
-		local hues = vals.hues
-
-		for _, v in ipairs(lights) do
-			print(v)
-		end
-
-		for _, v in ipairs(darks) do
-			print(v)
-		end
-
-		for _, v in ipairs(hues) do
-			print(v)
-		end
-	end)
+	-- it("test gen_colors", function()
+	-- 	local vals = alg.gen_colors({
+	-- 		-- the base color of the colorscheme
+	-- 		bias = "#769294",
+	-- 		hue_value = 0.8,
+	-- 		shade_value_range = { 0.1, 1 },
+	-- 	})
+	--
+	-- 	local lights = vals.lights
+	-- 	local darks = vals.darks
+	-- 	local hues = vals.hues
+	--
+	-- 	print(fmt.table_to_str(darks))
+	-- end)
 end)

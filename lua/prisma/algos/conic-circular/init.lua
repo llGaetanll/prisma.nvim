@@ -132,6 +132,8 @@ function M.gen_colors(params)
 		lights = lights,
 		darks = darks,
 		hues = hues,
+		hex = hex,
+		hsv_bias = hsv_bias,
 	}
 end
 

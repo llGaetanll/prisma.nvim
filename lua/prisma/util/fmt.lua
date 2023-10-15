@@ -12,7 +12,7 @@ function M.rgb_to_str(rgb)
 	local _rgb = {}
 
 	for _, v in ipairs(rgb) do
-		table.insert(v * 0xff, v)
+		table.insert(_rgb, v * 0xff)
 	end
 
 	return "RGB(" .. table.concat(_rgb, ", ") .. ")"
@@ -58,7 +58,7 @@ function M.table_to_str(tbl)
 			if type(v) ~= "table" then
 				return tostring(k) .. " = " .. tostring(v)
 			else
-				return rec(v, depth + 1)
+				return tostring(k) .. " = " .. rec(v, depth + 1)
 			end
 		end
 

@@ -14,14 +14,15 @@ local M = {}
 -- used to avoid floating point errors
 local EPSILON = 1e-10
 
-local function round(x)
-	return math.floor(x + 0.005)
+-- Rounds `x` to `n` decimal places
+local function round(x, n)
+	return math.floor(x + 0.5 * 10 ^ -n)
 end
 
 function M.hex_to_rgb(hex)
-	local b = round(hex % 0x100)
-	local g = round(hex / 0x100) % 0x100
-	local r = round(hex / 0x10000)
+	local b = round(hex % 0x100, 2)
+	local g = round(hex / 0x100, 2) % 0x100
+	local r = round(hex / 0x10000, 2)
 	--
 	-- local f = function(x)
 	-- 	return string.format("%x", x)
@@ -49,9 +50,9 @@ function M.hex_to_xyz(hex)
 end
 
 function M.rgb_to_hex(rgb)
-	local r = rgb[1] * 0xff -- [0, 255]
-	local g = rgb[2] * 0xff
-	local b = rgb[3] * 0xff
+	local r = round(rgb[1] * 0xff, 0) -- [0, 255]
+	local g = round(rgb[2] * 0xff, 0)
+	local b = round(rgb[3] * 0xff, 0)
 
 	return r * 0x10000 + g * 0x100 + b
 end
@@ -113,7 +114,7 @@ function M.xyz_to_hsv(xyz)
 
 	local s = 0
 	if math.abs(z) > EPSILON then
-		s = math.min(math.sqrt(x ^ 2 + y ^ 2) / z, 1)
+		s = math.min(math.sqrt((x ^ 2) + (y ^ 2)) / z, 1)
 	end
 
 	-- bounds a value in [-1, 1]
@@ -122,8 +123,10 @@ function M.xyz_to_hsv(xyz)
 		return math.max(math.min(x, 1), -1)
 	end
 
+	local THRESH = 1e-6
+
 	local h = 0
-	if math.abs(s) >= EPSILON then
+	if math.abs(s) >= THRESH then
 		local ac = math.acos(bd(x / (z * s))) / (2 * math.pi)
 		if y > 0 then
 			h = ac
