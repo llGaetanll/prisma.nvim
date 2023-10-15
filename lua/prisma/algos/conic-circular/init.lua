@@ -120,7 +120,7 @@ function M.gen_colors(params)
 
 	local range = array.linspace(lo, hi, 3)
 	local vr_lo = { range[1], range[2] }
-	local vr_hi = { range[2], range[3] }
+	local vr_hi = { range[3], range[2] }
 
 	local hues = M.gen_hues(hsv_bias, n, hue_value)
 	local shades = M.gen_shades(hsv_bias, m_shades, vr_lo, vr_hi)
