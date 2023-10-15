@@ -1,5 +1,10 @@
 local convert = require("prisma.util.convert")
 local array = require("prisma.util.array")
+local fmt = require("prisma.util.fmt")
+
+-- our maximum allowed error for each test. smaller is better
+-- if colors are this close to each other, it's good enough
+local ERROR = 1e-8
 
 describe("Conversion tests", function()
 	-- generated from python. Used for tests
@@ -39,10 +44,6 @@ describe("Conversion tests", function()
 			{ 0.3939205766731807, 0.19426013060599262, 0.792156862745098 },
 		},
 	}
-
-	-- our maximum allowed error for each test. smaller is better
-	-- if colors are this close to each other, it's good enough
-	local ERROR = 1e-8
 
 	-- checks if two tuples are close enough
 	local close_enough = function(a, b)
@@ -137,26 +138,115 @@ describe("Conversion tests", function()
 end)
 
 describe("Array tests", function()
-	local cmp_lists = function(lst1, lst2)
+	local close_enough = function(a, b)
+		return math.abs(a - b) < ERROR
+	end
+
+	local cmp_lists = function(lst1, lst2, eq)
 		assert.equals(#lst1, #lst2)
 
 		for i = 1, #lst1 do
 			local a = lst1[i]
 			local b = lst2[i]
 
-			assert.equals(a, b)
+			local res = eq(a, b)
+			if not res then
+				print("expected:")
+				print(fmt.table_to_str(lst1))
+				print("got:")
+				print(fmt.table_to_str(lst2))
+			end
+
+			assert.True(res)
 		end
 	end
 
-	it("linspace 1", function()
-		cmp_lists({ 0 }, array.linspace(0, 1, 1))
-	end)
+	it("linspace tests", function()
+		local tests = {
+			{
+				{ -90, -74, 7 },
+				{ -90.0, -87.33333333333333, -84.66666666666667, -82.0, -79.33333333333333, -76.66666666666667, -74.0 },
+			},
+			{
+				{ -10, 6, 12 },
+				{
+					-10.0,
+					-8.545454545454545,
+					-7.090909090909091,
+					-5.636363636363637,
+					-4.181818181818182,
+					-2.7272727272727266,
+					-1.2727272727272734,
+					0.18181818181818166,
+					1.6363636363636367,
+					3.0909090909090917,
+					4.545454545454547,
+					6.0,
+				},
+			},
+			{
+				{ -13, -4, 8 },
+				{
+					-13.0,
+					-11.714285714285714,
+					-10.428571428571429,
+					-9.142857142857142,
+					-7.857142857142857,
+					-6.571428571428571,
+					-5.285714285714285,
+					-4.0,
+				},
+			},
+			{ { -20, 3, 1 }, { -20.0 } },
+			{
+				{ -71, -51, 7 },
+				{
+					-71.0,
+					-67.66666666666667,
+					-64.33333333333333,
+					-61.0,
+					-57.666666666666664,
+					-54.33333333333333,
+					-51.0,
+				},
+			},
+			{ { -11, -2, 7 }, { -11.0, -9.5, -8.0, -6.5, -5.0, -3.5, -2.0 } },
+			{
+				{ -21, -5, 17 },
+				{
+					-21.0,
+					-20.0,
+					-19.0,
+					-18.0,
+					-17.0,
+					-16.0,
+					-15.0,
+					-14.0,
+					-13.0,
+					-12.0,
+					-11.0,
+					-10.0,
+					-9.0,
+					-8.0,
+					-7.0,
+					-6.0,
+					-5.0,
+				},
+			},
+			{ { -25, -2, 4 }, { -25.0, -17.333333333333332, -9.666666666666666, -2.0 } },
+			{ { -100, -87, 1 }, { -100.0 } },
+			{ { -89, -73, 11 }, { -89.0, -87.4, -85.8, -84.2, -82.6, -81.0, -79.4, -77.8, -76.2, -74.6, -73.0 } },
+		}
 
-	it("linspace 2", function()
-		cmp_lists({ 1, 2, 3, 4, 5 }, array.linspace(1, 5, 5))
-	end)
+		for _, v in ipairs(tests) do
+			local input = v[1]
+			local expected = v[2]
 
-	it("linspace 3", function()
-		cmp_lists({ -2, -1, 0, 1, 2 }, array.linspace(-2, 2, 5))
+			local lo = input[1]
+			local hi = input[2]
+			local n = input[3]
+
+			cmp_lists(expected, array.linspace(lo, hi, n), close_enough)
+		end
 	end)
 end)

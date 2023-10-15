@@ -14,10 +14,21 @@ local M = {}
 -- used to avoid floating point errors
 local EPSILON = 1e-10
 
+local function round(x)
+	return math.floor(x + 0.005)
+end
+
 function M.hex_to_rgb(hex)
-	local b = hex % 0x100
-	local g = math.floor(hex / 0x100) % 0x100
-	local r = math.floor(hex / 0x10000)
+	local b = round(hex % 0x100)
+	local g = round(hex / 0x100) % 0x100
+	local r = round(hex / 0x10000)
+	--
+	-- local f = function(x)
+	-- 	return string.format("%x", x)
+	-- end
+	--
+	-- print(f(hex))
+	-- print(f(r), f(g), f(b))
 
 	-- normalize
 	r = r / 0xff
