@@ -14,8 +14,8 @@ Prisma.config = {
 		angular_bias = 0.1, -- number in [0, 1)
 		hue_rot = 3,
 
-		dark_range = { 0.1, 4 },
-		light_range = { 0.6, 1 },
+		dark_range = { 0.1, 0.4 },
+		light_range = { 0.6, 0.9 },
 	},
 
 	terminal_colors = true,

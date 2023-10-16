@@ -91,6 +91,18 @@ function M.gen_shades(hsv_bias, m, vr_lo, vr_hi)
 		local p = util.line_point(hsv_bias, v)
 		local dark = convert.xyz_to_hex(p)
 		local dark_str = fmt.hex_to_str(dark)
+
+		local hsv = convert.xyz_to_hsv(p)
+		local rgb = convert.hsv_to_rgb(hsv)
+		local hex = convert.rgb_to_hex(rgb)
+
+		-- local tbl = {
+		-- 	xyz = fmt.xyz_to_str(p),
+		-- 	hsv = fmt.hsv_to_str(hsv),
+		-- 	rgb = fmt.rgb_to_str(rgb),
+		-- 	hex = fmt.hex_to_str(hex),
+		-- }
+
 		table.insert(darks, dark_str)
 	end
 

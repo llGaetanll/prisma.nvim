@@ -63,7 +63,13 @@ describe("Algo tests", function()
 	-- 		-- the base color of the colorscheme
 	-- 		bias = "#769294",
 	-- 		hue_value = 0.8,
-	-- 		shade_value_range = { 0.1, 0.8 },
+	--
+	-- 		angular_bias = 0.1, -- number in [0, 1)
+	-- 		hue_rot = 3,
+	--
+	-- 		-- numbers in [0, 1]
+	-- 		dark_range = { 0.1, 0.4 },
+	-- 		light_range = { 0.6, 0.1 },
 	-- 	})
 	--
 	-- 	local lights = vals.lights
