@@ -203,9 +203,9 @@ return function(config, colors)
 		StorageClass = { link = "PrismaOrange" },
 		Structure = { link = "PrismaAqua" },
 		Typedef = { link = "PrismaYellow" },
-		Pmenu = { fg = palette.fg4, bg = palette.bg1 }, -- TODO: check
+		Pmenu = { fg = palette.bg4, bg = palette.bg1 }, -- TODO: check
 		PmenuSel = { fg = palette.fg1, bg = palette.bg3, bold = config.bold },
-		PmenuSbar = { bg = palette.red },
+		PmenuSbar = { bg = palette.cyan },
 		PmenuThumb = { bg = palette.cyan },
 		DiffDelete = { bg = palette.dark_red },
 		DiffAdd = { bg = palette.dark_green },
