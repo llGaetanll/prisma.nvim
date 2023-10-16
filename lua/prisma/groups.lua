@@ -133,7 +133,7 @@ return function(config, colors)
 		NormalFloat = config.transparent_mode and { fg = palette.fg1, bg = nil }
 			or { fg = palette.fg1, bg = palette.bg1 },
 		NormalNC = config.dim_inactive and { fg = palette.fg0, bg = palette.bg1 } or { link = "Normal" },
-		CursorLine = { bg = palette.bg1 },
+		CursorLine = { bg = palette.bg2 },
 		CursorColumn = { link = "CursorLine" },
 		TabLineFill = { fg = palette.bg4, bg = palette.bg1, reverse = config.invert_tabline },
 		TabLineSel = { fg = palette.green, bg = palette.bg1, reverse = config.invert_tabline },
