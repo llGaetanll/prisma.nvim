@@ -203,10 +203,10 @@ return function(config, colors)
 		StorageClass = { link = "PrismaOrange" },
 		Structure = { link = "PrismaAqua" },
 		Typedef = { link = "PrismaYellow" },
-		Pmenu = { fg = palette.fg1, bg = palette.bg2 }, -- TODO: check
+		Pmenu = { fg = palette.fg4, bg = palette.bg1 }, -- TODO: check
 		PmenuSel = { fg = palette.fg1, bg = palette.bg3, bold = config.bold },
-		PmenuSbar = { bg = palette.bg2 },
-		PmenuThumb = { bg = palette.bg4 },
+		PmenuSbar = { bg = palette.red },
+		PmenuThumb = { bg = palette.cyan },
 		DiffDelete = { bg = palette.dark_red },
 		DiffAdd = { bg = palette.dark_green },
 		DiffChange = { bg = palette.dark_aqua },
@@ -248,7 +248,7 @@ return function(config, colors)
 		GitSignsChange = { link = "PrismaAquaSign", bg = nil },
 		GitSignsDelete = { link = "PrismaRedSign", bg = nil },
 		NvimTreeWinSeparator = { fg = palette.bg1, bg = palette.bg1 },
-		NvimTreeHeader = { fg = palette.red, bg = nil, bold = true, italic = true },
+		NvimTreeHeader = { fg = palette.red, bg = palette.bg0, bold = true, italic = true },
 		NvimTreeNormal = { bg = palette.bg0 },
 		NvimTreeEndOfBuffer = { bg = palette.bg0 },
 		NvimTreeSymlink = { fg = palette.neutral_aqua },
