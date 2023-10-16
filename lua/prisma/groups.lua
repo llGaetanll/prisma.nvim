@@ -339,16 +339,16 @@ return function(config, colors)
 		TelescopeNormal = { bg = palette.bg0 },
 
 		-- top left
-		TelescopePromptBorder = { fg = palette.bg2, bg = palette.bg2 },
-		TelescopePromptNormal = { fg = palette.red, bg = palette.bg2 },
-		TelescopePromptPrefix = { fg = palette.red, bg = palette.bg2, bold = true },
+		TelescopePromptBorder = { fg = palette.bg3, bg = palette.bg3 },
+		TelescopePromptNormal = { fg = palette.red, bg = palette.bg3 },
+		TelescopePromptPrefix = { fg = palette.red, bg = palette.bg3, bold = true },
 		TelescopePromptTitle = { fg = palette.bg0, bg = palette.red, bold = true },
-		TelescopePromptCounter = { fg = palette.fg4, bg = palette.bg2 },
+		TelescopePromptCounter = { fg = palette.fg4, bg = palette.bg3 },
 
 		-- bottom left
-		TelescopeResultsTitle = { fg = palette.bg1, bg = palette.aqua, bold = true },
-		TelescopeResultsBorder = { fg = palette.bg1, bg = palette.bg1 },
-		TelescopeResultsNormal = { bg = palette.bg1 },
+		TelescopeResultsTitle = { fg = palette.bg2, bg = palette.aqua, bold = true },
+		TelescopeResultsBorder = { fg = palette.bg2, bg = palette.bg2 },
+		TelescopeResultsNormal = { bg = palette.bg2 },
 
 		-- right
 		TelescopePreviewTitle = { fg = palette.bg0, bg = palette.green, bold = true },
