@@ -247,7 +247,7 @@ return function(config, colors)
 		GitSignsAdd = { link = "PrismaGreenSign", bg = nil },
 		GitSignsChange = { link = "PrismaAquaSign", bg = nil },
 		GitSignsDelete = { link = "PrismaRedSign", bg = nil },
-		NvimTreeWinSeparator = { fg = palette.bg0, bg = palette.bg0 },
+		NvimTreeWinSeparator = { fg = palette.bg1, bg = palette.bg1 },
 		NvimTreeHeader = { fg = palette.red, bg = palette.bg0, bold = true, italic = true },
 		NvimTreeNormal = { bg = palette.bg0 },
 		NvimTreeEndOfBuffer = { bg = palette.bg0 },
