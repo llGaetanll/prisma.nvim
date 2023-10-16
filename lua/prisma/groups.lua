@@ -203,7 +203,7 @@ return function(config, colors)
 		StorageClass = { link = "PrismaOrange" },
 		Structure = { link = "PrismaAqua" },
 		Typedef = { link = "PrismaYellow" },
-		Pmenu = { fg = palette.fg1, bg = palette.bg1 }, -- TODO: check
+		Pmenu = { fg = palette.fg1, bg = palette.bg2 }, -- TODO: check
 		PmenuSel = { fg = palette.fg1, bg = palette.bg3, bold = config.bold },
 		PmenuSbar = { bg = palette.bg2 },
 		PmenuThumb = { bg = palette.bg4 },
@@ -247,6 +247,7 @@ return function(config, colors)
 		GitSignsAdd = { link = "PrismaGreenSign", bg = nil },
 		GitSignsChange = { link = "PrismaAquaSign", bg = nil },
 		GitSignsDelete = { link = "PrismaRedSign", bg = nil },
+		NvimTreeWinSeparator = { fg = palette.bg1, bg = palette.bg1 },
 		NvimTreeHeader = { fg = palette.red, bg = nil, bold = true, italic = true },
 		NvimTreeNormal = { bg = palette.bg0 },
 		NvimTreeEndOfBuffer = { bg = palette.bg0 },
